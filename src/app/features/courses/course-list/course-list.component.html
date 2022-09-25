@@ -1,0 +1,7 @@
+<div class="m-2">
+
+    <app-course-card class="p-2" *ngFor="let course of courseList" [course]="course"> 
+        <app-button [isEditButton]="isEditable" buttonText="Show course"></app-button>
+     </app-course-card>
+
+</div>

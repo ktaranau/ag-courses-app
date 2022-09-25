@@ -1,0 +1,9 @@
+<div class="divBorder d-inline-flex">
+    <button class="border ">{{buttonText}}</button>
+    <button *ngIf="isEditButton" class="border " mat-fab color="primary">
+        <fa-icon [icon]="faPen"></fa-icon>
+      </button>
+      <button *ngIf="isEditButton" class="border" mat-fab color="primary">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+</div>

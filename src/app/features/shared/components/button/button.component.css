@@ -1,0 +1,28 @@
+.border {
+    border: solid rgb(136, 57, 156) 2px !important;
+    background-color: white;
+    margin: 5px;
+    transition-duration: 0.4s;
+} 
+
+.border:hover {
+    border: solid rgb(136, 57, 156) 2px !important;
+    background-color: rgb(199, 199, 199);
+    margin: 7px;
+} 
+
+.border:focus {
+    border: solid rgb(136, 57, 156) 2px !important;
+    background-color: rgb(199, 199, 199);
+    margin: 7px;
+} 
+
+.border:active {
+    border: solid rgb(228, 11, 11) 2px !important;
+    background-color: rgba(199, 199, 199, 0.048);
+    margin: 5px;
+} 
+
+.divBorder {
+    margin: 5px !important;
+} 
