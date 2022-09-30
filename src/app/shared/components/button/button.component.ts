@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,13 +8,21 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class ButtonComponent implements OnInit {
 
+  @Output() buttonClicked = new EventEmitter<string>()
+
+  onClick() {
+    this.buttonClicked.emit("qwe")
+  } 
+
   @Input() isEditButton:boolean;
+
+  @Input() isDeleteButton:boolean;
 
   faPen = faPen;
 
   faTrash= faTrash;
 
-  @Input() buttonText: String;
+  @Input() buttonText: string;
   
   constructor() { }
 

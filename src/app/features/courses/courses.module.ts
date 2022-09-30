@@ -4,6 +4,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { SharedModule } from '../../shared/shared.module';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { CourseListComponent } from './course-list/course-list.component';
+import { LoginModule } from '../login/login.module';
 
 
 
@@ -15,7 +16,8 @@ import { CourseListComponent } from './course-list/course-list.component';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    LoginModule
   ],
   exports: [CoursesComponent]
 })

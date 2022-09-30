@@ -1,1 +1,27 @@
-<p>login works!</p>
+<form #form="ngForm" (ngSubmit)="login()">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" (blur)="emailValueChange(emailNgModel.value, emailNgModel.errors)" [ngClass]="{'is-invalid': emailNgModel.invalid && emailNgModel.touched}"
+            emailValidator type="email" name="email" id="email" required #emailNgModel="ngModel" [ngModel]="email"
+            (ngModelChange)="
+          emailValueChange(emailNgModel.value, emailNgModel.errors)
+        " />
+        <div class="error-message">
+            <span class="">{{ emailErrorMessage }}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" name="password" id="password"
+            [ngClass]="{'is-invalid': passwordNgModel.invalid && passwordNgModel.touched}" required
+            #passwordNgModel="ngModel" [minlength]="8" [maxlength]="16" [ngModel]="password" (ngModelChange)="
+          passwordValueChange(passwordNgModel.value, passwordNgModel.errors)
+        " />
+        <div class="invalid-feedback">
+            <span class="error-message">{{ passwordErrorMessage }}</span>
+        </div>
+    </div>
+    <p>
+        <button type="submit" [disabled]="form.invalid">Submit</button>
+    </p>
+</form>

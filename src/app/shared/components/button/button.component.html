@@ -1,9 +1,11 @@
 <div class="divBorder d-inline-flex">
-    <button class="border ">{{buttonText}}</button>
-    <button *ngIf="isEditButton" class="border " mat-fab color="primary">
-        <fa-icon [icon]="faPen"></fa-icon>
-      </button>
-      <button *ngIf="isEditButton" class="border" mat-fab color="primary">
-        <fa-icon [icon]="faTrash"></fa-icon>
-      </button>
+  <button (click)="onClick()" class="border ">
+    <ng-container *ngIf="!isEditButton && !isDeleteButton">{{buttonText}}</ng-container>
+    <ng-container *ngIf="isEditButton">
+      <fa-icon [icon]="faPen"></fa-icon>
+    </ng-container>
+    <ng-container *ngIf="isDeleteButton">
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </ng-container>
+  </button>
 </div>

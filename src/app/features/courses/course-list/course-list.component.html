@@ -1,7 +1,11 @@
 <div class="m-2">
 
-    <app-course-card class="p-2" *ngFor="let course of courseList" [course]="course"> 
-        <app-button [isEditButton]="isEditable" buttonText="Show course"></app-button>
-     </app-course-card>
+    <app-course-card class="p-2" *ngFor="let course of courseList" [course]="course">
+        <app-button buttonText="Show course"></app-button>
+        <ng-container *ngIf="isEditable">
+            <app-button [isEditButton]="true" buttonText="Show course"></app-button>
+            <app-button [isDeleteButton]="true" buttonText="Show course"></app-button>
+        </ng-container>
+    </app-course-card>
 
 </div>
