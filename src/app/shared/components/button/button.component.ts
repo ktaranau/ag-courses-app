@@ -14,6 +14,8 @@ export class ButtonComponent implements OnInit {
     this.buttonClicked.emit("qwe")
   } 
 
+  @Input() type = "button"
+
   @Input() isEditButton:boolean;
 
   @Input() isDeleteButton:boolean;

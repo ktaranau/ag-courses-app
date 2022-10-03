@@ -6,6 +6,8 @@ import { CoursesModule } from './features/courses/courses.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CourseComponent } from './features/course/course.component';
 import { LoginModule } from './features/login/login.module';
+import { RegistrationModule } from './features/registration/registration.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { LoginModule } from './features/login/login.module';
     BrowserModule,
     CoursesModule,
     LoginModule,
-    FontAwesomeModule
+    RegistrationModule,
+    FontAwesomeModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
