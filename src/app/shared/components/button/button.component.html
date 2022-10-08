@@ -1,5 +1,5 @@
 <div class="divBorder d-inline-flex">
-  <button [type]="type" (click)="onClick()" class="border ">
+  <button (click)="onClick()" [type]="type" class="border">
     <ng-container *ngIf="!isEditButton && !isDeleteButton">{{buttonText}}</ng-container>
     <ng-container *ngIf="isEditButton">
       <fa-icon [icon]="faPen"></fa-icon>
