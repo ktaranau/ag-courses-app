@@ -2,3 +2,7 @@
     color: red;
 }
 
+.center-label {
+    text-align: center;
+    line-height: 150%;
+}

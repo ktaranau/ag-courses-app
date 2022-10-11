@@ -16,12 +16,12 @@ export class LoginComponent implements OnInit {
 
   emailValueChange(email: string, errors: ValidationErrors): void {
     this.email = email;
-    this.validationCheck(errors, 'email')
+    this.validationCheck(errors, 'Email')
   }
 
   passwordValueChange(password: string, errors: ValidationErrors): void {
     this.password = password;
-    this.validationCheck(errors, 'password');
+    this.validationCheck(errors, 'Password');
   }
 
   onFormSubmit(form: FormGroup) {
@@ -30,14 +30,14 @@ export class LoginComponent implements OnInit {
 
   private validationCheck(
     errors: ValidationErrors,
-    fieldName: 'email' | 'password'
+    fieldName: 'Email' | 'Password'
   ): void {
     console.log(errors)
     let errorMessage: string;
     if (!errors) {
       errorMessage = '';
     } else if (errors['required']) {
-      errorMessage = 'Email is required';
+      errorMessage = `${fieldName} is required`;
     } else if (errors['emailValid']) {
       errorMessage = `Incorrect format`;
     } else if (errors['minlength']) {
@@ -52,10 +52,10 @@ export class LoginComponent implements OnInit {
   }
 
   private setErrorMessage(
-    fieldName: 'email' | 'password',
+    fieldName: 'Email' | 'Password',
     errorMessage: string
   ): void {
-    if (fieldName === 'email') {
+    if (fieldName === 'Email') {
       this.emailErrorMessage = errorMessage;
     } else {
       this.passwordErrorMessage = errorMessage;

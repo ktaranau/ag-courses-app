@@ -1,0 +1,75 @@
+<div class="">
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit(courseForm)">
+        <div class="row align-items-md-center">
+            <div>
+                <label style="font-weight:bold" for="title">Title</label>
+                <div class="d-flex justify-content-between align-items-md-center">
+                    <input type="text" id="title" formControlName="title" class="form-control w-75 "
+                        [ngClass]="{ 'is-invalid': submitted && form.title.errors }" />
+                    <app-button class="" type="submit" buttonText="Create course"></app-button>
+                </div>
+                <div *ngIf="submitted && form.title.errors" class="invalid-feedback">
+                    <div *ngIf="form.title.errors.required">Title is required</div>
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <label style="font-weight:bold" for="courseTextArea">Description</label>
+            <textarea formControlName="description" class="form-control" id="courseTextArea" rows="8"
+                [ngClass]="{ 'is-invalid': submitted && form.description.errors }">
+        </textarea>
+            <div *ngIf="submitted && form.description.errors" class="invalid-feedback">
+                <div *ngIf="form.description.errors.required">
+                    Description is required
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div>
+                    <h4 style="text-align: center;">Add authors</h4>
+                    <label style="font-weight:bold" for="newAuthor">Author name</label>
+                    <input formControlName="newAuthor" class="form-control" id="newAuthor" rows="4"
+                        [ngClass]="{ 'is-invalid': form.newAuthor.errors }" />
+                    <div *ngIf="form.newAuthor.errors" class="invalid-feedback">
+                        <div *ngIf="form.newAuthor.errors.required">
+                            Name is required
+                        </div>
+                        <div *ngIf="form.newAuthor.errors.pattern">
+                            Name has invalid characters
+                        </div>
+                    </div>
+                    <div style="text-align: center;" formArrayName="authors">
+                        <app-button (buttonClicked)="addAuthor()" buttonText="Create Author"></app-button>
+                    </div>
+                </div>
+                <hr />
+                <div>
+                    <h4 style="text-align: center;">Duration</h4>
+                    <label style="font-weight:bold">Duration</label>
+                    <input type="number"  formControlName="duration" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && form.duration.errors }" />
+                    <div *ngIf="submitted && form.duration.errors" class="invalid-feedback">
+                        <div *ngIf="form.duration.errors.required">Duration is required</div>
+                        <div *ngIf="form.duration.errors.min">Duration cannot be less than
+                            {{form.duration.errors.min.min}}
+                        </div>
+                    </div>
+                    <label>
+                        <div>Duration : {{ form.duration.value | durationPipe }} </div>
+                    </label>
+                </div>
+            </div>
+            <div class="col-6">
+                <h4 style="text-align: center;">Authors list</h4>
+                <div *ngFor="let author of authorNames; let i = index">
+                    <div class="d-flex justify-content-evenly align-items-md-center">
+                        {{ author }}
+                        <app-button (buttonClicked)="deleteAuthor(i)" buttonText="Delete author"></app-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
