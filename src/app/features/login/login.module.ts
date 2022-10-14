@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthModule } from 'src/app/auth/auth.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     FormsModule,
     CommonModule,
-    SharedModule
+    SharedModule,
+    AuthModule
   ],
   exports: [LoginComponent]
 })

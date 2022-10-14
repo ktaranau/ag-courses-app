@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,  } from '@angular/forms';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { SessionStorageService } from 'src/app/auth/services/session-storage.service';
 import { formEmailValidator } from 'src/app/shared/validators/emailValidator';
 
 @Component({
@@ -11,8 +13,11 @@ export class RegistrationComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
    }
 
   ngOnInit(): void {
@@ -25,15 +30,37 @@ export class RegistrationComponent implements OnInit {
 
   get form() { return this.registerForm.controls; }
 
-  onSubmit(form: FormGroup) {
+  onSubmit(form: FormGroup): void {
+
     this.submitted = true;
-    console.log(form)
     if (!form.valid) {
-      return
-    }
+          return
+        }
 
-    alert("Success: \n" + JSON.stringify(this.registerForm.value, null, 4));
-
+    this.authService.register(this.form.name.value, this.form.email.value, this.form.password.value).subscribe(
+      data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      err => {
+        console.log(err)
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
   }
+
+
+  // onSubmit(form: FormGroup) {
+  //   this.submitted = true;
+  //   console.log(form)
+  //   if (!form.valid) {
+  //     return
+  //   }
+
+  //   alert("Success: \n" + JSON.stringify(this.registerForm.value, null, 4));
+
+  // }
 
 }

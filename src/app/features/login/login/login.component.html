@@ -1,4 +1,4 @@
-<form #form="ngForm" (ngSubmit)="login()">
+<form #form="ngForm" (ngSubmit)="onSubmit()">
     <h5 class="text-center">Login</h5>
     <div class="form-group">
         <label for="email">Email</label>
@@ -24,5 +24,6 @@
     </div>
     <p>
         <button type="submit" [disabled]="form.invalid">Submit</button>
+        <button type="button" (click)="logout()">Logout</button>
     </p>
 </form>
