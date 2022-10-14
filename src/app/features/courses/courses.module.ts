@@ -7,6 +7,7 @@ import { CourseListComponent } from './course-list/course-list.component';
 import { LoginModule } from '../login/login.module';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CoursesRoutingModule } from 'src/app/app-routing/courses-routing/courses-routing.module';
 
 
 
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SharedModule,
     LoginModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoursesRoutingModule
   ],
   exports: [CoursesComponent, CourseFormComponent]
 })
