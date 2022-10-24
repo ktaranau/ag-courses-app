@@ -26,9 +26,7 @@ export class TokenInterceptor implements HttpInterceptor {
       })
     }
     return next.handle(authReq).pipe(map((event: HttpEvent<any>) => {
-    console.log(event)
       if (event instanceof HttpResponse) {
-        console.log(event.status)
         if (event.status === 401) {
           this.authService.logout();
           this.router.navigateByUrl('/login');

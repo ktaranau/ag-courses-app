@@ -3,7 +3,7 @@
     <div class="flex-column p-2">
 
         <h2>{{courseView.title}} </h2>
-        <p >{{courseView.description}}</p>
+        <p>{{courseView.description}}</p>
 
     </div>
 
@@ -25,6 +25,14 @@
         </table>
 
         <ng-content></ng-content>
+
+        <app-button (buttonClicked)="navigateToCourse(course.id)" type="Submit" buttonText="Show course"></app-button>
+        <ng-container *ngIf="isEditable">
+            <app-button (buttonClicked)="navigateToEditCourse(course.id)" type="Submit" [isEditButton]="true"
+                buttonText="Edit course"></app-button>
+            <app-button (buttonClicked)="deleteCourse(course.id)" type="Submit" [isDeleteButton]="true"
+                buttonText="Delete course"></app-button>
+        </ng-container>
 
     </div>
 

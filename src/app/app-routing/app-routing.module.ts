@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../features/login/login/login.component';
 import { RegistrationComponent } from '../features/registration/registration/registration.component';
-import { AuthorizedGuard } from '../auth/guards/authorized.guard';
 import { NotAuthorizedGuard } from '../auth/guards/not-authorized.guard';
 
 const routes: Routes = [

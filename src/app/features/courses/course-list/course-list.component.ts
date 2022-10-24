@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CoursesService } from 'src/app/services/courses.service';
 import { Course } from '../interfaces/course';
 
 @Component({
@@ -8,21 +10,29 @@ import { Course } from '../interfaces/course';
 })
 export class CourseListComponent implements OnInit {
 
-  @Output() onClick = new EventEmitter()
 
+  @Input() term: string;
   @Input() isEditable: boolean;
 
   courseList: Course[]
 
-  constructor() { }
+  constructor(private coursesService: CoursesService, private router: Router, private route: ActivatedRoute) { }
+
 
   ngOnInit(): void {
     this.courseList = mockedCourseList;
+      this.coursesService.getAll().subscribe((data)=>{
+        this.courseList = data.result;        ;
+      })
+
   }
+
 
 }
 
-const mockedCourseList: Course[] = [
+
+
+const mockedCourseList: any= [
   {
     id: "de5aaa59-90f5-4dbc-b8a9-aaf205c551ba",
     title: "JavaScript",
