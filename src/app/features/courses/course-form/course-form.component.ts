@@ -4,9 +4,10 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  
-} from '@angular/forms';
 
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CoursesStoreService } from 'src/app/services/courses-store.service';
 
 @Component({
   selector: 'app-course-form',
@@ -21,9 +22,25 @@ export class CourseFormComponent implements OnInit {
     Validators.pattern('[a-zA-Z0-9]*'),
   ];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private coursesStoreService: CoursesStoreService, private router: Router, private route: ActivatedRoute) { }
+
+  getCourse(id: string) {
+    this.coursesStoreService.getCourse(id).subscribe((res) => {
+      console.log("res", res)
+      const { result } = res
+      this.courseForm = this.formBuilder.group({
+        title: [result.title, Validators.required],
+        description: [result.description, Validators.required],
+        duration: [result.duration, [Validators.required, Validators.min(0)]],
+        newAuthor: [''],
+        authors: this.formBuilder.array(result.authors?.map((author: string) => this.formBuilder.group({ name: author }))),
+      });
+    })
+  }
 
   ngOnInit(): void {
+    let param = this.route.snapshot.paramMap.get('id')
+
     this.courseForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -31,6 +48,12 @@ export class CourseFormComponent implements OnInit {
       newAuthor: [''],
       authors: this.formBuilder.array([]),
     });
+
+    if (param) {
+      this.getCourse(param)
+
+    }
+
   }
 
   get form() {
@@ -90,14 +113,22 @@ export class CourseFormComponent implements OnInit {
   }
 
   onSubmit(courseForm: FormGroup) {
+    let id = this.route.snapshot.paramMap.get('id')
+    if (id) {
+      this.coursesStoreService.editCourse(id, courseForm.value).subscribe((data) => console.log("EDITED DATA", data))
+    } else {
+      this.coursesStoreService.createCourse(courseForm.value).subscribe((data) => console.log("CREATE COURSE DATA", data))
+    }
+
     this.removeNewAuthorValidators();
     this.submitted = true;
 
     if (!this.courseForm.valid) {
       return;
     }
-    
-    console.log(courseForm.value);
+
+    console.log("After creating", courseForm.value);
     this.submitted = false;
   }
+
 }

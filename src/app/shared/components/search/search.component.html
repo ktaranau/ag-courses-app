@@ -2,7 +2,7 @@
     <form>
         <div class="row align-items-md-center">
             <div class="col-10 m-4">
-                <input type="text" class="form-control">
+                <input type="text" placeholder="Search courses..." [(ngModel)]="term" class="form-control">
             </div>
             <div class="col">
                 <app-button type="submit" buttonText="Search"></app-button>

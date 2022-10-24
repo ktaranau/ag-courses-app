@@ -10,8 +10,8 @@ export class ButtonComponent implements OnInit {
 
   @Output() buttonClicked = new EventEmitter<string>()
 
-  onClick() {
-    this.buttonClicked.emit("qwe")
+  emitEvent() {
+    this.buttonClicked.emit("")
   } 
 
   @Input() type = "button"

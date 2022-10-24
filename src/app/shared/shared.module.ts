@@ -8,14 +8,17 @@ import { SearchComponent } from './components/search/search.component';
 import { EmailValidatorDirective } from './directives/validator/validator.directive';
 import { DurationPipe } from './pipes/duration.pipe';
 import { CreationDatePipe } from './pipes/creation-date.pipe';
+import { SearchPipe } from './components/search/search.pipe';
+import { FormsModule } from '@angular/forms';
 
-var components: Type<any>[] = [HeaderComponent, ButtonComponent, InfoComponent, SearchComponent, EmailValidatorDirective, DurationPipe, CreationDatePipe]
+var components: Type<any>[] = [HeaderComponent, ButtonComponent, InfoComponent, SearchComponent, EmailValidatorDirective, DurationPipe, CreationDatePipe, SearchPipe]
 
 @NgModule({
   declarations: components, 
   imports: [
     CommonModule, 
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   exports: components
 })

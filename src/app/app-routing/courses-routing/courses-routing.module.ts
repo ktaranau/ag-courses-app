@@ -9,9 +9,8 @@ import { NotAuthorizedGuard } from 'src/app/auth/guards/not-authorized.guard';
 const routes: Routes = [
   {path : '', component : CoursesComponent, },
   { path: 'add', component: CourseFormComponent },
-  { path: 'edit/:id', component: CourseCardComponent },
   { path: ':id', component: CourseCardComponent},
-
+  { path: ':id/edit', component: CourseFormComponent},
 ];
 
 @NgModule({
