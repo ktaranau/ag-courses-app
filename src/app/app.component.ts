@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SessionStorageService } from './auth/services/session-storage.service';
+import { UserStoreService } from './user/services/user-store.service';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,10 @@ export class AppComponent {
 
   title = 'courses-app';
 
-  constructor(private sessionService: SessionStorageService) { }
+  constructor(private sessionService: SessionStorageService, private userService: UserStoreService) { }
 
   ngOnInit(): void {
+    this.userService.getUser()
     // this.isLoggedIn = !!this.sessionService.getToken();
 
     // if (this.isLoggedIn) {

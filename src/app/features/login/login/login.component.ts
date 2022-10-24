@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { SessionStorageService } from 'src/app/auth/services/session-storage.service';
+import { UserService } from 'src/app/user/services/user.service';
 
 
 @Component({
@@ -105,7 +106,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private authService: AuthService, private sessionStorage: SessionStorageService) { }
+  constructor(private authService: AuthService, private sessionStorage: SessionStorageService, private userService: UserService) { }
 
   ngOnInit(): void {
     if (this.sessionStorage.getToken()) {

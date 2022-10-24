@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
+import {  CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AppRoutingModule } from 'src/app/app-routing/app-routing.module';
-import { CoursesRoutingModule } from 'src/app/app-routing/courses-routing/courses-routing.module';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
