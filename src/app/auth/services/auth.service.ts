@@ -19,7 +19,6 @@ export class AuthService {
   constructor(private http: HttpClient, private sessionStorage: SessionStorageService) { }
 
   isLoggedIn() {    
-    console.log(!!this.sessionStorage.getToken())
     return !!this.sessionStorage.getToken();
   }
 
@@ -29,18 +28,6 @@ export class AuthService {
       password
     })
   }
-
-  //   this.http.post<LoginResponse>("http://localhost:4000/login", user)
-  //     // .pipe(
-  //     //   catchError(this.handleError)
-  //     // )
-  //     .subscribe(data => {
-  //       if (data.successful) {
-  //         let token = data.result.split(' ')[1]
-  //         this.sessionStorage.setToken(token)
-  //       }
-  //     })
-  // }
 
   logout() {
     this.sessionStorage.deleteToken()
@@ -55,32 +42,5 @@ export class AuthService {
       password
     })
   }
-
-  // register(user: UserDTO) {
-  //   this.http.post<LoginResponse>("http://localhost:4000/register", user)
-  //     // .pipe(
-  //     //   catchError(this.handleError)
-  //     // )
-  //     .subscribe(data => {
-  //       if (data.successful) {
-  //         let token = data.result.split(' ')[1]
-  //         this.sessionStorage.setToken(token)
-  //       }
-  //     })
-  // }
-
-  // private handleError(error: HttpErrorResponse) {
-  //   if (error.status === 0) {
-  //     // A client-side or network error occurred. Handle it accordingly.
-  //     console.error('An error occurred:', error.error);
-  //   } else {
-  //     // The backend returned an unsuccessful response code.
-  //     // The response body may contain clues as to what went wrong.
-  //     console.error(
-  //       `Backend returned code ${error.status}, body was: `, error.error);
-  //   }
-  //   // Return an observable with a user-facing error message.
-  //   return throwError(() => new Error('Something bad happened; please try again later.'));
-  // }
 
 }

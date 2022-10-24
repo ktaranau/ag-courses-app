@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, concatAll, forkJoin, map } from 'rxjs';
 import { Course } from '../features/courses/interfaces/course';
 import { AuthorsStoreService } from './authors-store.service';
-import { AuthorsService } from './authors.service';
 import { CoursesService } from './courses.service';
 
 @Injectable({
