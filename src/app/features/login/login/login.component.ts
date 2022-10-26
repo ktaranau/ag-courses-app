@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { SessionStorageService } from 'src/app/auth/services/session-storage.service';
 import { UserService } from 'src/app/user/services/user.service';
@@ -53,7 +54,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.sessionStorage.getUser().roles;
-        this.reloadPage();
+        this.router.navigateByUrl("/courses")
       },
       err => {
         console.log(err)
@@ -106,7 +107,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private authService: AuthService, private sessionStorage: SessionStorageService, private userService: UserService) { }
+  constructor(private authService: AuthService, private sessionStorage: SessionStorageService, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     if (this.sessionStorage.getToken()) {

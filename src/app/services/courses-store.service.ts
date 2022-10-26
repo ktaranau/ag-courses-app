@@ -12,7 +12,7 @@ export class CoursesStoreService {
   private readonly courses$$ = new BehaviorSubject<Course[]>([]);
   private readonly isLoading$$ = new BehaviorSubject<boolean>(false);
 
-  readonly authors$ = this.courses$$.asObservable();
+  readonly courses$ = this.courses$$.asObservable();
   readonly isLoading$ = this.isLoading$$.asObservable();
 
   constructor(private coursesService: CoursesService, private authorsService: AuthorsStoreService) { }
@@ -61,7 +61,11 @@ export class CoursesStoreService {
     return this.coursesService.getCourse(id).pipe(map((course) => course));
   }
 
-  get courses(): Course[] {
+  getAllCourses() {
+    return this.getCourses()
+  }
+
+  getCourses(): Course[] {
     this.isLoading$$.next(true)
     this.coursesService.getAll().subscribe(res => {
       this.isLoading$$.next(false);

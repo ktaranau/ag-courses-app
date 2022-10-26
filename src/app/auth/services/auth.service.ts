@@ -30,8 +30,6 @@ export class AuthService {
   }
 
   logout() {
-    this.sessionStorage.deleteToken()
-    window.sessionStorage.clear();
     return this.http.delete("http://localhost:4000/logout")
   }
 
