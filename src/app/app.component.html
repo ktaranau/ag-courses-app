@@ -1,5 +1,5 @@
 <app-header>
     <p class="p-4">Name</p>
-    <app-button buttonText="Logout"></app-button>
+    <app-button (buttonClicked)="logout()" buttonText="Logout"></app-button>
 </app-header>
 <router-outlet></router-outlet>
