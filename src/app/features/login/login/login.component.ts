@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { SessionStorageService } from 'src/app/auth/services/session-storage.service';
 import { UserService } from 'src/app/user/services/user.service';
+import { AuthStateFacade } from 'src/app/auth/store/auth.facade';
 
 
 @Component({
@@ -43,25 +45,26 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.email, this.password)
-    this.authService.login(this.email, this.password).subscribe(
+    this.authFacade.login(this.email, this.password)
 
-      data => {
-        console.log(data)
-        let token = data.result.split(' ')[1]
-        this.sessionStorage.setToken(token)
-        this.sessionStorage.saveUser(data);
+    // this.authService.login(this.email, this.password).subscribe(
 
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.sessionStorage.getUser().roles;
-        this.router.navigateByUrl("/courses")
-      },
-      err => {
-        console.log(err)
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      }
-    );
+    //   data => {
+    //     console.log(data)
+    //     let token = data.result.split(' ')[1]
+    //     this.sessionStorage.setToken(token)
+
+    //     this.isLoginFailed = false;
+    //     this.isLoggedIn = true;
+    //     this.roles = this.sessionStorage.getUser().roles;
+    //     this.router.navigateByUrl("/courses")
+    //   },
+    //   err => {
+    //     console.log(err)
+    //     this.errorMessage = err.error.message;
+    //     this.isLoginFailed = true;
+    //   }
+    // );
   }
 
   logout(): void{
@@ -81,7 +84,6 @@ export class LoginComponent implements OnInit {
     errors: ValidationErrors,
     fieldName: 'Email' | 'Password'
   ): void {
-    console.log(errors)
     let errorMessage: string;
     if (!errors) {
       errorMessage = '';
@@ -107,7 +109,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private authService: AuthService, private sessionStorage: SessionStorageService, private userService: UserService, private router: Router) { }
+  constructor(private authService: AuthService, private sessionStorage: SessionStorageService, 
+    private userService: UserService, private router: Router, private authFacade: AuthStateFacade) { }
 
   ngOnInit(): void {
     if (this.sessionStorage.getToken()) {

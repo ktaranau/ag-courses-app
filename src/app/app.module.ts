@@ -9,11 +9,16 @@ import { RegistrationModule } from './features/registration/registration.module'
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { authInterceptorProviders } from './auth/interceptors/token.interceptor';
+import {NgxsModule} from '@ngxs/store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { effects, reducers } from './store';
+import { AuthStateFacade } from './auth/store/auth.facade';
+import { UserFacade } from './user/store/user.facade';
+import { AuthorsStateFacade } from './store/authors/authors.facade';
+import { CoursesStateFacade } from './store/courses/courses.facade';
 
 @NgModule({
   declarations: [
@@ -27,12 +32,11 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     FontAwesomeModule,
     SharedModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot()
+    EffectsModule.forRoot(effects),
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, AuthStateFacade, UserFacade, AuthorsStateFacade, CoursesStateFacade],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

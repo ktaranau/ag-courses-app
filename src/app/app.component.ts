@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/services/auth.service';
 import { SessionStorageService } from './auth/services/session-storage.service';
+import { AuthStateFacade } from './auth/store/auth.facade';
 import { UserStoreService } from './user/services/user-store.service';
+import { UserFacade } from './user/store/user.facade';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,8 @@ export class AppComponent {
 
   title = 'courses-app';
 
-  constructor(private sessionStorage: SessionStorageService, private router: Router, private userService: UserStoreService, private authService: AuthService) { }
+  constructor(private sessionStorage: SessionStorageService, private router: Router, 
+    private userFacade: UserFacade, private authService: AuthService, private authFacade: AuthStateFacade) { }
 
   isLoginFailed = false;
 
@@ -42,7 +45,8 @@ export class AppComponent {
 
 
   ngOnInit(): void {
-    this.userService.getUser()
+    this.authFacade.setAuthorization()
+    this.userFacade.getCurrentUser()
     // this.isLoggedIn = !!this.sessionService.getToken();
 
     // if (this.isLoggedIn) {

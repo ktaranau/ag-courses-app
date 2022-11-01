@@ -11,7 +11,6 @@ const USER_KEY = 'auth-user';
 export class SessionStorageService {
 
   private TOKEN: string = "token"
-  // private window: Window;
 
   private isAuthorized$$: BehaviorSubject<boolean>
   public isAuthorized$: Observable<boolean>
@@ -24,7 +23,6 @@ export class SessionStorageService {
   }
 
   setToken(token: string): void {
-    console.log(token)
     window.sessionStorage.removeItem(TOKEN)
     window.sessionStorage.setItem(TOKEN, token)
   }
