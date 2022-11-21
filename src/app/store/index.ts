@@ -22,6 +22,6 @@ export const effects: any[] = [
 export const reducers: ActionReducerMap<State> = {
     auth: authReducer,
     user: userReducer,
-    author: authorsReducer,
+    authors: authorsReducer,
     courses: coursesReducer
   };

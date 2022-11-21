@@ -24,11 +24,10 @@ export class CoursesStoreService {
       })
     ).pipe(
       map((ids) => {
+        let ncourse = course
+        ncourse.authors = ids; 
         return this.coursesService.createCourse(
-          course.title,
-          course.description,
-          course.duration,
-          ids
+          ncourse
         );
       }),
       concatAll()
@@ -42,11 +41,10 @@ export class CoursesStoreService {
       })
     ).pipe(
       map((ids) => {
-        return this.coursesService.editCourse(id,
-          course.title,
-          course.description,
-          course.duration,
-          ids
+        let ncourse = course
+        ncourse.authors = ids; 
+        return this.coursesService.editCourse(
+          ncourse
         );
       }),
       concatAll()

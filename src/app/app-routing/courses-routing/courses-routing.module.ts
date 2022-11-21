@@ -7,9 +7,9 @@ import { AdminGuard } from 'src/app/auth/guards/admin.guard';
 
 const routes: Routes = [
   {path : '', component : CoursesComponent, },
-  { path: 'add', component: CourseFormComponent, canActivate: [AdminGuard] },
+  { path: 'add', component: CourseFormComponent,  },
   { path: ':id', component: CourseCardComponent},
-  { path: ':id/edit', component: CourseFormComponent, canActivate: [AdminGuard]},
+  { path: ':id/edit', component: CourseFormComponent, },
 ];
 
 @NgModule({

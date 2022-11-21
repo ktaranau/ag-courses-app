@@ -8,8 +8,8 @@ import { NotAuthorizedGuard } from '../auth/guards/not-authorized.guard';
 
 const routes: Routes = [
   {path : 'courses', loadChildren: () => import('../features/courses/courses.module').then(m => m.CoursesModule), },
-  {path : 'login', component : LoginComponent, canActivate: [NotAuthorizedGuard]},
-  {path : 'registration', component : RegistrationComponent, canActivate: [NotAuthorizedGuard]},
+  {path : 'login', component : LoginComponent, },
+  {path : 'registration', component : RegistrationComponent, },
 
 ];
 

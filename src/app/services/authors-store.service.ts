@@ -31,7 +31,7 @@ export class AuthorsStoreService {
   }
 
   addAuthor(name: string): Observable<string> {
-    return this.authorsService.addAuthor(name).pipe(
+    return this.authorsService.addAuthor({name}).pipe(
       map((apiResponse) => {
         console.log("apiResponse", apiResponse)
         this.authors = [

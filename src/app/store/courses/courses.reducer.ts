@@ -38,9 +38,10 @@ export const reducer = createReducer(
         };
     }),
     on(coursesAction.requestAllCoursesSuccess, (coursesState, { courses }) => {
+        console.log("SUCESS COURSES", courses)
         return {
             ...coursesState,
-            authors: courses,
+            allCourses: courses,
             isAllCoursesLoading: false
         }
     }),

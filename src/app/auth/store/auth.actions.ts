@@ -1,5 +1,4 @@
 import { createAction, props } from "@ngrx/store";
-import { User } from "src/app/services/interfaces/user";
 
 export const requestLogin = createAction(
   '[Auth API] Request Login',

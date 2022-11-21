@@ -10,24 +10,26 @@ export const authorsFeatureKey = {
 
 export interface AuthorsState {
     authors: Author[],
-    addedAuthor: Author,
+    addedAuthor: Author[],
     message: string
 }
 
 export const initialAuthorsState: AuthorsState = {
     authors: [] as Author[],
-    addedAuthor: {} as Author,
+    addedAuthor: [] as Author[],
     message: ""
 };
 
 export const reducer = createReducer(
     initialAuthorsState,
     on(authorActions.requestAuthors, (authorsState, { }) => {
+        console.log("authorsState", authorsState)
         return {
             ...authorsState,
         };
     }),
     on(authorActions.requestAuthorsSuccess, (authorsState, { authors }) => {
+        console.log(authors)
         return {
             ...authorsState,
             authors: authors,
@@ -44,13 +46,17 @@ export const reducer = createReducer(
         }
     }),
     on(authorActions.requestAddAuthorSuccess, (authorsState, { author }) => {
+        console.log( "ALO",authorsState, author)
         return {
             ...authorsState,
             authors: [
                 ...authorsState.authors,
                 author
             ],
-            addedAuthor: author
+            addedAuthor: [
+                ...authorsState.addedAuthor,
+                author
+            ]
         }
     }),
     on(authorActions.requestAddAuthorFail, (authorsState, { error }) => {
@@ -62,7 +68,7 @@ export const reducer = createReducer(
     on(authorActions.resetAddedAuthor, (authorsState, { }) => {
         return {
             ...authorsState,
-            addedAuthor: { "id": "", "name": "" }
+            addedAuthor: []
         }
     })
 );
