@@ -17,12 +17,18 @@ export class AdminGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    return this.userFacade.isAdmin$.pipe(map((isAdmin) => {
-      if (!isAdmin) {
-        return this.router.parseUrl("/courses")
-      }
-      return isAdmin;
+    let admin = false;
+    this.userFacade.isAdmin$.subscribe(((isAdmin) => {
+      console.log("is admin", isAdmin)
+      admin = isAdmin
     }))
+
+    if (!admin) {
+      console.log(admin)
+      return this.router.parseUrl("/courses")
+    }
+    return admin;
+
   }
+
 }

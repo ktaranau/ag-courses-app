@@ -31,10 +31,10 @@ export class CoursesEffects {
     getSpecificCourse$ = createEffect(() =>
         this.actions$.pipe(
             ofType(requestSingleCourse),
-            mergeMap((action) => this.coursesService.getCourse(action.id)
+            mergeMap((action) => this.coursesService.getCourse(action.id)  // todo usse authors facade to replaces ids with names
                 .pipe(
-                    map(res => (requestAllCourses())),
-                    catchError((res) => of(requestDeleteCourseFail(res.result)))
+                    map(res => (requestSingleCourseSuccess({ course: res.result }))),
+                    catchError((res) => of(requestSingleCourseFail(res.result)))
                 )
             )
         ),
@@ -46,8 +46,8 @@ export class CoursesEffects {
             ofType(requestDeleteCourse),
             mergeMap((action) => this.coursesService.deleteCourse(action.id)
                 .pipe(
-                    map(res => (requestSingleCourseSuccess({ course: res.result }))),
-                    catchError((res) => of(requestSingleCourseFail(res.result)))
+                    map(() => (requestAllCourses())),
+                    catchError((res) => of(requestDeleteCourseFail(res.result)))
                 )
             )
         ),
@@ -57,7 +57,7 @@ export class CoursesEffects {
     editCourse$ = createEffect(() =>
         this.actions$.pipe(
             ofType(requestEditCourse),
-            mergeMap((action) => this.coursesService.editCourse(action.id, action.title, action.description, action.duration, action.authors)
+            mergeMap((action) => this.coursesService.editCourse(action.course)
                 .pipe(
                     map(res => (requestEditCourseSuccess({ editedCourse: res.result }))),
                     catchError((res) => of(requestEditCourseFail(res.result)))
@@ -70,7 +70,7 @@ export class CoursesEffects {
     createCourse$ = createEffect(() =>
         this.actions$.pipe(
             ofType(requestCreateCourse),
-            mergeMap((action) => this.coursesService.createCourse(action.title, action.description, action.duration, action.authors)
+            mergeMap((action) => this.coursesService.createCourse(action.course)
                 .pipe(
                     map(res => (requestCreateCourseSuccess({ addedCourse: res.result }))),
                     catchError((res) => of(requestCreateCourseFail(res.result)))

@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { select, Store } from "@ngrx/store";
+import { Course } from "src/app/features/courses/interfaces/course";
 import { CoursesState } from "src/app/store/courses/courses.reducer";
+import { resetAddedAuthor } from "../authors/authors.actions";
 import { requestAllCourses, requestCreateCourse, requestDeleteCourse, requestEditCourse, requestSingleCourse } from "./courses.actions";
 import { isAllCoursesLoadingSelector, isSearchingStateSelector, isSingleCourseLoadingSelector, getCourse, getAllCourses, getCourses, getErrorMessage } from "./courses.selectors";
 
@@ -28,19 +30,20 @@ export class CoursesStateFacade {
     }
 
     getSingleCourse(id: string): void {
-        this.store.dispatch(requestSingleCourse({ id: id }))
+        this.store.dispatch(requestSingleCourse({ id }))
     }
 
     getFilteredCourses(searchValue: string): void {
         this.store.dispatch(requestAllCourses())
     }
 
-    editCourse(id: string, title: string, description: string, duration: number, authors: string[]): void {
-        this.store.dispatch(requestEditCourse({ id, title, description, duration, authors }))
+    editCourse(course: Course): void {
+        this.store.dispatch(requestEditCourse({course}))
     }
 
-    createCourse(title: string, description: string, duration: number, authors: string[]): void {
-        this.store.dispatch(requestCreateCourse({ title, description, duration, authors }))
+    createCourse(course: Course): void {
+        this.store.dispatch(resetAddedAuthor())        
+        this.store.dispatch(requestCreateCourse({course}))
     }
 
     deleteCourse(id: string): void {

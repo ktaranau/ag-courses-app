@@ -16,10 +16,10 @@ export class AuthorsService {
     return this.http.get<ApiResponse<Author[]>>("http://localhost:4000/authors/all")
   }
 
-  addAuthor(name: string): Observable<ApiResponse<Author>> {
+  addAuthor(data: {name: string}): Observable<ApiResponse<Author>> {
     return this.http.post<ApiResponse<Author>>(
       'http://localhost:4000/authors/add',
-      name
+      data
     );
   }
 

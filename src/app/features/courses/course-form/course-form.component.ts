@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesStoreService } from 'src/app/services/courses-store.service';
+import { AuthorsStateFacade } from 'src/app/store/authors/authors.facade';
+import { CoursesStateFacade } from 'src/app/store/courses/courses.facade';
 
 @Component({
   selector: 'app-course-form',
@@ -22,11 +24,11 @@ export class CourseFormComponent implements OnInit {
     Validators.pattern('[a-zA-Z0-9]*'),
   ];
 
-  constructor(private formBuilder: FormBuilder, private coursesStoreService: CoursesStoreService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder, private coursesStoreService: CoursesStoreService,
+     private router: Router, private route: ActivatedRoute, private coursesFacade: CoursesStateFacade, private authorsFacade: AuthorsStateFacade) { }
 
   getCourse(id: string) {
     this.coursesStoreService.getCourse(id).subscribe((res) => {
-      console.log("res", res)
       const { result } = res
       this.courseForm = this.formBuilder.group({
         title: [result.title, Validators.required],
@@ -87,6 +89,10 @@ export class CourseFormComponent implements OnInit {
       return;
     }
 
+    this.authorsFacade.addAuthor(this.courseForm.get('newAuthor').value)
+    
+    this.authorsFacade.authors$.subscribe((data)=> console.log( data ))
+
     this.authors.push(this.newAuthor());
     let currentAuthor = this.authors.length - 1;
     this.authors.controls[currentAuthor]
@@ -94,7 +100,7 @@ export class CourseFormComponent implements OnInit {
       .setValue(this.courseForm.get('newAuthor').value);
   }
 
-  deleteAuthor(index: number) {
+  deleteAuthor(index: number) {    
     this.authors.removeAt(index);
   }
 
@@ -115,9 +121,11 @@ export class CourseFormComponent implements OnInit {
   onSubmit(courseForm: FormGroup) {
     let id = this.route.snapshot.paramMap.get('id')
     if (id) {
+      
       this.coursesStoreService.editCourse(id, courseForm.value).subscribe((data) => console.log("EDITED DATA", data))
     } else {
-      this.coursesStoreService.createCourse(courseForm.value).subscribe((data) => console.log("CREATE COURSE DATA", data))
+      this.coursesFacade.createCourse(courseForm.value)
+      // this.coursesStoreService.createCourse(courseForm.value).subscribe((data) => console.log("CREATE COURSE DATA", data))
     }
 
     this.removeNewAuthorValidators();

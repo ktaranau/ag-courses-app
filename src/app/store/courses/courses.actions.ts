@@ -11,7 +11,7 @@ export const requestAllCourses = createAction(
   );
   
   export const requestAllCoursesFail = createAction(
-    '[Courses API] Request Login Fail',
+    '[Courses API] Request All Courses Fail',
     props<{ error: string[] }>()
 
   );
@@ -59,7 +59,7 @@ export const requestAllCourses = createAction(
 
   export const requestEditCourse = createAction(
     '[Courses API] Request Edit Course',
-    props<{ id: string, title: string, description: string, duration: number, authors: string[] }>()
+    props<{ course: Course }>()
   );
 
   export const requestEditCourseSuccess = createAction(
@@ -74,7 +74,7 @@ export const requestAllCourses = createAction(
 
   export const requestCreateCourse = createAction(
     '[Courses API] Request Create Course',
-    props<{  title: string, description: string, duration: number, authors: string[] }>()
+    props<{ course: Course }>()
   );
 
   export const requestCreateCourseSuccess = createAction(

@@ -20,7 +20,7 @@ export class AuthorsEffects {
             ofType(requestAuthors),
             mergeMap(() => this.authorsService.getAll()
                 .pipe(
-                    map(res => (requestAuthorsSuccess({ authors: res.result }))),
+                    map(res => (console.log(res), requestAuthorsSuccess({ authors: res.result as any }))),
                     catchError((res) => of(requestAuthorsFail()))
                 )
             )
@@ -31,7 +31,7 @@ export class AuthorsEffects {
     addAuthor$ = createEffect(() =>
         this.actions$.pipe(
             ofType(requestAddAuthor),
-            mergeMap((action) => this.authorsService.addAuthor(action.name)
+            mergeMap((action) => this.authorsService.addAuthor({name: action.name})
                 .pipe(
                     map(res => (requestAddAuthorSuccess({ author: res.result }))),
                     catchError((res) => of(requestAuthorsFail()))
